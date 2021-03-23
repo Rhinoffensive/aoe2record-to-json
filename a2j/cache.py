@@ -19,9 +19,12 @@ def put(record: str, commands: list, data: dict):
     cache_file = file_path(record, commands)
     path = ""
 
+    startPath = os.getcwd()
+    relPath = os.path.relpath(cache_file, startPath) 
+
     # CREATE MISSING DIRECTORIES
-    for directory in cache_file.split("/")[:-1]:
-        path += "/" + directory
+    for directory in relPath.split("\\")[:-1]:
+        path += "\\" + directory
         if not os.path.exists(path):
             os.mkdir(path)
 
@@ -66,8 +69,9 @@ def file_path(record: str, commands: list) -> str:
     :rtype: str
     """
     commands.sort()
+    print(os.path.join( os.getcwd(), "/cache/") + ("/".join(commands)) + "/" + record)
 
-    return os.getcwd() + "/cache/" + ("/".join(commands)) + "/" + record
+    return os.path.join( os.getcwd(), "/cache/") + ("/".join(commands)) + "/" + record
 
 
 def clean(record: str) -> int:

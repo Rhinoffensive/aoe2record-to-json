@@ -124,4 +124,4 @@ def v1_parse(commands: str) -> Response:
 
 
 # START THE APPLICATION ON PORT 8080
-app.run(host="0.0.0.0", debug=False, port=8080)
+app.run(host="0.0.0.0", debug=True, port=8080)
